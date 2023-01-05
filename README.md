@@ -1,5 +1,5 @@
 # EventPage
-
+hosted link: https://aditya21102001.github.io/cn-event-page/
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.4.
 
 ## Development server
