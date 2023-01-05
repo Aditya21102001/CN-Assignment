@@ -1,0 +1,163 @@
+<app-navbar></app-navbar>
+
+<div *ngIf="mobileTags === false">
+  <div id="eventsWrapper" class="events-outer-wrapper">
+    <div id="list-header">
+      <div class="header-text">EVENTS &amp; NEWS</div>
+      <div style="color: black">Learn, Compete &amp; Grow</div>
+    </div>
+    <div class="events-wrapper">
+      <div class="tabs event-categories">
+        <a
+          [ngStyle]="
+            event_category == 'ALL_EVENTS' ? { color: 'rgb(255, 132, 0)' } : {}
+          "
+          class="tab selected"
+          (click)="getEventCategory('ALL_EVENTS')"
+        >
+          <i class="fa fa-calendar fs-3 me-2" aria-hidden="true"></i>
+          All Events </a
+        ><a
+          [ngStyle]="
+            event_category == 'WEBINAR' ? { color: 'rgb(255, 132, 0)' } : {}
+          "
+          class="tab"
+          (click)="getEventCategory('WEBINAR')"
+        >
+          <i class="fa fa-video-camera fs-3 me-2" aria-hidden="true"></i>
+          Webinars </a
+        ><a
+          class="tab"
+          (click)="getEventCategory('CODING_EVENT')"
+          [ngStyle]="
+            event_category == 'CODING_EVENT'
+              ? { color: 'rgb(255, 132, 0)' }
+              : {}
+          "
+        >
+          <i class="fa fa-codepen fs-3 me-2" aria-hidden="true"></i>
+          Coding Events </a
+        ><a
+          class="tab"
+          (click)="getEventCategory('BOOTCAMP_EVENT')"
+          [ngStyle]="
+            event_category == 'BOOTCAMP_EVENT'
+              ? { color: 'rgb(255, 132, 0)' }
+              : {}
+          "
+        >
+          <i class="fa fa-user-circle-o fs-3 me-2" aria-hidden="true"></i>
+          Bootcamp Events </a
+        ><a
+          class="tab"
+          (click)="getEventCategory('WORKSHOP')"
+          [ngStyle]="
+            event_category == 'WORKSHOP' ? { color: 'rgb(255, 132, 0)' } : {}
+          "
+        >
+          <i class="fa fa-files-o fs-3 me-2" aria-hidden="true"></i>
+          Workshop
+        </a>
+      </div>
+
+      <div class="tabs event-sub-categories">
+        <a
+          class="tab selected"
+          (click)="getEventSubCategory('Upcoming')"
+          [ngStyle]="
+            event_sub_category == 'Upcoming'
+              ? { color: 'rgb(255, 132, 0)' }
+              : {}
+          "
+        >
+          Upcoming </a
+        ><a
+          class="tab"
+          (click)="getEventSubCategory('Archived')"
+          [ngStyle]="
+            event_sub_category == 'Archived'
+              ? { color: 'rgb(255, 132, 0)' }
+              : {}
+          "
+        >
+          Archived </a
+        ><a
+          class="tab"
+          (click)="getEventSubCategory('All Time Favorites')"
+          [ngStyle]="
+            event_sub_category == 'All Time Favorites'
+              ? { color: 'rgb(255, 132, 0)' }
+              : {}
+          "
+        >
+          All Time Favorites </a
+        ><!---->
+      </div>
+      <div class="events-body">
+        <div class="event-cards-container">
+          <!---->
+
+          <div class="events-container">
+            <div class="cont" *ngIf="events.length !== 0">
+              <div *ngFor="let event of events; let i = index" class="row">
+                <div class="event col" *ngIf="i % 2 === 0">
+                  <app-card [event]="events[i]"> </app-card>
+                </div>
+                <!-- <div
+                  class="event col"
+                  *ngIf="i % 2 === 0 && i < events.length - 1"
+                >
+                  <app-card [event]="events[i + 1]"> </app-card>
+                </div> -->
+                <!---->
+              </div>
+            </div>
+            <h3
+              class="d-flex justify-content-center"
+              *ngIf="events.length === 0"
+            >
+              No Events Found
+            </h3>
+            <div class="page fs-6" *ngIf="pageCount">
+              <button
+                class="btn px-3 btn-page me-2"
+                (click)="showPrevPage()"
+                [disabled]="curPage == 1"
+              >
+                <
+              </button>
+              Page
+              <input
+                class="mx-2"
+                type="number"
+                style="width: 30px"
+                value="{{ curPage }}"
+                disabled
+              />
+              of
+              {{ pageCount }}
+              <button
+                class="btn px-3 btn-page ms-2 next"
+                (click)="showNextPage()"
+                [disabled]="curPage === pageCount || pageCount === 0"
+              >
+                >
+              </button>
+            </div>
+            <!---->
+          </div>
+        </div>
+
+        <div class="tags-container tg">
+          <app-tags
+            [tagColor]="tagColor"
+            (sendTag)="pushTag($event)"
+          ></app-tags>
+        </div>
+      </div>
+      <!---->
+    </div>
+  </div>
+
+  <app-footer> </app-footer>
+</div>

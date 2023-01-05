@@ -1,0 +1,14 @@
+<div>
+  <button
+    (click)="toggleDisplayDiv()"
+    style="position: fixed; left: 0; bottom: 0; z-index: 20"
+    class="btn btn-light d-sm-none"
+  >
+    <i class="fa fa-filter"></i>
+  </button>
+  <div *ngIf="!isShowDiv">
+    <div class="filter-modal d-sm-none">
+      <app-tags [tagColor]="tagColor" (sendTag)="pushTag($event)"></app-tags>
+    </div>
+  </div>
+</div>
